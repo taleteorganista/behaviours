@@ -1,0 +1,8 @@
+prefix=/home/lattepanda/lattepanda_behaviours/behaviour_ros/install
+
+Name: lattepanda_behaviours
+Description: Description of lattepanda_behaviours
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy std_msgs message_runtime

@@ -1,0 +1,9 @@
+<launch>
+    <param name="rs_video" type="int" value="0" />
+    <param name="rs_depth" type="int" value="0" />
+
+    <node name="behaviour_ros" pkg="lattepanda_behaviours" type="behaviour_main.py" output="screen"/>  
+
+    <node name="realsense_behaviour" pkg="lattepanda_behaviours" type="realsense.py" />
+    <node name="navigator_behaviour" pkg="lattepanda_behaviours" type="navigator.py" />
+    <node name="microphone_behaviour" pkg="lattepanda_behaviours" type="microphone.py" /> </launch>

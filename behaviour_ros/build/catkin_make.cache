@@ -1,0 +1,2 @@
+lattepanda_behaviours
+-DCATKIN_DEVEL_PREFIX=/home/lattepanda/lattepanda_behaviours/behaviour_ros/devel -DCMAKE_INSTALL_PREFIX=/home/lattepanda/lattepanda_behaviours/behaviour_ros/install -G Unix Makefiles

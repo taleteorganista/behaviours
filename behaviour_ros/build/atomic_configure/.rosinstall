@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/lattepanda/lattepanda_behaviours/behaviour_ros/devel/setup.sh
