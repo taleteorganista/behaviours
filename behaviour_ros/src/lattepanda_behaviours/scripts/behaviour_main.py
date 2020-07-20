@@ -11,10 +11,11 @@ from pymavlink import mavutil
 from nav_msgs.msg import Odometry
 
 connection = mavutil.mavlink_connection("udp:192.168.1.10:8150",input=False)
+msg = vect_msg()
 
 # TODO define mavlink message to send a vector instead of Odometry Msg 
 
-def callback(nav_sub,mic_sub,rs_sub):
+def callback(nav_sub,mic_sub,rs_sub,pub):
     
     # Collecting vectors
     vect_a  = [mic_sub.angle, mic_sub.value]
@@ -34,7 +35,7 @@ def callback(nav_sub,mic_sub,rs_sub):
     z = 0
     q = [0,0,0,0]
     vx = 0
-    vy = 00
+    vy = 0
     vz = 0
     rollspeed = 0
     pitchspeed = 0
@@ -49,7 +50,9 @@ def callback(nav_sub,mic_sub,rs_sub):
 
     # Sending Mavlink Msg
     connection.mav.odometry_send(time_usec,frame_id,child_frame_id,x,y,z,q,vx,vy,vz,rollspeed,pitchspeed,yawspeed,pose_covariance,velocity_covariance,reset_counter,estimator_type)
-
+    msg.angle = bb_vect[0]
+    msg.value = bb_vect[1]
+    pub.publish(msg)
 
 def behaviour_main():
     # Intialize node and topic
@@ -66,7 +69,7 @@ def behaviour_main():
     # Syncronize
     ts = message_filters.ApproximateTimeSynchronizer([nav_sub,mic_sub,rs_sub], queue_size=10, slop=0.5)
     # Run callback
-    ts.registerCallback(callback)
+    ts.registerCallback(callback,pub)
     rospy.spin()           
 
 
