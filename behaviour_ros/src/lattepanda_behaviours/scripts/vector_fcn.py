@@ -4,6 +4,7 @@ import random
 import os
 os.environ['MAVLINK20']='1' #set mavlink2 for odometry message
 from pymavlink import mavutil
+import time
 
 def sum_vect(vectA,vectB):
     # This function implements the sum of two vector in polar coordinates
@@ -21,21 +22,28 @@ def sum_vect(vectA,vectB):
     return vect
 
 def plt_vect(vect):
+    print(vect)
     # This function plots n vectors in vect 
     nvect = len(vect)
-    f = plt.figure()
-    ax = plt.subplot(111, projection='polar')
-    RMAX = max([row[1] for row in vect])*1.2
-    ax.set_rmax(RMAX)
-    ax.grid(True)
-    ax.set_title("Polar vector plot", va='bottom')
+    # plt.figure(1)
+    # ax = plt.subplot(111, projection='polar')
+    # # RMAX = max([row[1] for row in vect])*1.2
+    # RMAX = 4
+    # ax.set_rmax(RMAX)
+    # ax.grid(True)
+    # ax.set_title("Polar vector plot", va='bottom')
+
+    # Define colors
+    r = np.linspace(0,1,nvect)
+    g = np.roll(r,1) 
+    b = np.roll(g,1)
+    
     for i in range(0,nvect):
-        r = random.random()
-        b = random.random()
-        g = random.random()
-        color = (r, g, b)
-        plt.arrow(vect[i][0]*np.pi/180, 0, 0*np.pi/180,vect[i][1], alpha = 0.5, width = 0.015,edgecolor = color, facecolor = color, lw = 2, zorder = 5)
-    plt.show()
+        color = (r[i], g[i], b[i])
+        plt.arrow(vect[i][0]*np.pi/180, 0, 0*np.pi/180, vect[i][1], alpha = 0.5, width = 0.015,edgecolor = color, facecolor = color, lw = 2, zorder = 5)
+    # plt.show(block=False)
+    # plt.pause(0.000001)
+    # plt.clf()   
 
 def send_vect(vect,connection):
     # vect is a vector in polar coordinates

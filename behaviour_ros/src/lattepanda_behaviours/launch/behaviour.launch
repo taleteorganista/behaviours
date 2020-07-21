@@ -1,6 +1,6 @@
 <launch>
-    <param name="rs_video" type="int" value="1" />
-    <param name="rs_depth" type="int" value="1" />
+    <param name="rs_video" type="int" value="0" />
+    <param name="rs_depth" type="int" value="0" />
 
     <node name="behaviour_ros" pkg="lattepanda_behaviours" type="behaviour_main.py" output="screen"/>  
 

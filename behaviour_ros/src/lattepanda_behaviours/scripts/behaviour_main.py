@@ -8,22 +8,48 @@ import vector_fcn as vectfcn
 import os
 os.environ['MAVLINK20']='1' #set mavlink2 for odometry message
 from pymavlink import mavutil
+# from drawnow import drawnow, figure
 from nav_msgs.msg import Odometry
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import random
 
 connection = mavutil.mavlink_connection("udp:192.168.1.10:8150",input=False)
 msg = vect_msg()
 
+# Initialize the graph
+fig = plt.figure(1)
+ax = plt.subplot(111, projection='polar')
+
+RMAX = 4
+ax.set_rmax(RMAX)
+ax.grid(True)
+ax.set_title("Polar vector plot", va='bottom')
+l, = ax.plot([],[])
+
+vect = [[0,0]] 
+
 # TODO define mavlink message to send a vector instead of Odometry Msg 
+def update(i):
+    global vect
+    # vectfcn.plt_vect(vect)
+    datay = random.random()
+    l.set_data(2, datay)
+    return l,
+
 
 def callback(nav_sub,mic_sub,rs_sub,pub):
-    
+    global vect
     # Collecting vectors
     vect_a  = [mic_sub.angle, mic_sub.value]
     vect_b  = [nav_sub.angle, nav_sub.value]
     vect_c  = [rs_sub.angle, rs_sub.value]
-    
+
     # Sum vectors
     bb_vect = vectfcn.sum_vect(vectfcn.sum_vect(vect_a,vect_b),vect_c)
+    vect = [vect_a,vect_b,vect_c,bb_vect]
+    # drawnow(vectfcn.plt_vect,[vect_b])
+    # vectfcn.plt_vect()
     rospy.loginfo(bb_vect) 
     
     # Preparing Mavlink Odometry Msg
@@ -59,6 +85,8 @@ def behaviour_main():
     pub = rospy.Publisher('behaviour_vect', vect_msg, queue_size=100)
     rospy.init_node('behaviour_ros', anonymous=True)
     rate = rospy.Rate(10) # 10hz
+    ani = animation.FuncAnimation(fig,update,frames=50,interval=200,blit=True)
+    plt.show(block=False)
     # Initialize ros message
     # msg = vect_msg()
     # Initialize mavlink connection to K64F board
