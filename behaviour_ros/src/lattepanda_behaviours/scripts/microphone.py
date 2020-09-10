@@ -5,7 +5,7 @@ import rospy
 from lattepanda_behaviours.msg import vect_msg
 from pyfirmata import Arduino, util
 import time
-import numpy
+import numpy as np
 
 def microphone():
     # Intialize node and topic
@@ -83,7 +83,7 @@ def microphone():
             rospy.loginfo('Right Calmp')
         SignalMinR = 1.0
         SignalMaxR = 0.0
-        angle=(pktopkL - pktopkR)*180
+        angle=(pktopkL - pktopkR)*180/np.pi
 
         # vect = [angle,value]  
 

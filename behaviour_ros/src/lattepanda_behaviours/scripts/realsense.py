@@ -86,19 +86,19 @@ def realsense():
             validIdxR = np.nonzero(valid_matrix[0:3,2])
             
             if(((len(validIdxL[0]))>1 and len(validIdxR[0]))>1):
-                angle = (np.mean(dist[validIdxL,0]) - np.mean(dist[validIdxR,2]))*180/np.pi
+                angle = 180 - (np.mean(dist[validIdxL,0]) - np.mean(dist[validIdxR,2]))*180/np.pi
                 value = 1/np.amin(dist)
                 # saturation 
                 if value > 1/minDist:       # saturation to max speed
-                    value = 3.
-                elif value<1/maxDist:     # saturation to min speed
+                    value = 1.5
+                if value<1/maxDist:     # saturation to min speed
                     value = 0
             else:
                 angle = 0
                 value = 0
             
             # print(angle, value)
-            vect = [angle,-value]
+            vect = [180,value]
     
             # Show the two frames together:
             if show_depth: 
@@ -113,8 +113,8 @@ def realsense():
 
             # Send data
             msg.header.stamp = rospy.Time.now()
-            msg.angle = angle
-            msg.value = value
+            msg.angle = vect[0]
+            msg.value = vect[1]
             rospy.loginfo('Realsense vector data sent')
             pub.publish(msg)
             rate.sleep()

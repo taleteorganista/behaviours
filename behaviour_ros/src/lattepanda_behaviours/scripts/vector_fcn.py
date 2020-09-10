@@ -25,13 +25,13 @@ def plt_vect(vect):
     print(vect)
     # This function plots n vectors in vect 
     nvect = len(vect)
-    # plt.figure(1)
-    # ax = plt.subplot(111, projection='polar')
-    # # RMAX = max([row[1] for row in vect])*1.2
-    # RMAX = 4
-    # ax.set_rmax(RMAX)
-    # ax.grid(True)
-    # ax.set_title("Polar vector plot", va='bottom')
+    plt.figure(1)
+    ax = plt.subplot(111, projection='polar')
+    # RMAX = max([row[1] for row in vect])*1.2
+    RMAX = 4
+    ax.set_rmax(RMAX)
+    ax.grid(True)
+    ax.set_title("Polar vector plot", va='bottom')
 
     # Define colors
     r = np.linspace(0,1,nvect)
@@ -41,9 +41,8 @@ def plt_vect(vect):
     for i in range(0,nvect):
         color = (r[i], g[i], b[i])
         plt.arrow(vect[i][0]*np.pi/180, 0, 0*np.pi/180, vect[i][1], alpha = 0.5, width = 0.015,edgecolor = color, facecolor = color, lw = 2, zorder = 5)
-    # plt.show(block=False)
-    # plt.pause(0.000001)
-    # plt.clf()   
+    plt.show(block=False)
+
 
 def send_vect(vect,connection):
     # vect is a vector in polar coordinates

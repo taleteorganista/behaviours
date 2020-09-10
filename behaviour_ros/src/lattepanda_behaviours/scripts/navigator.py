@@ -15,7 +15,7 @@ def navigator():
 
     while not rospy.is_shutdown():
         angle = 0
-        value = 1.5
+        value = 0.8
         vect = [angle,value]
         msg.header.stamp = rospy.Time.now()
         msg.angle = angle
