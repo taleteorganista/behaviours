@@ -1,8 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # license removed for brevity
 import rospy
 from lattepanda_behaviours.msg import vect_msg
-from pyfirmata import Arduino, util
 import time
 import numpy
 

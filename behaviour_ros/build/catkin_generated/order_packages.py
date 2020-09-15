@@ -2,4 +2,4 @@
 source_root_dir = '/home/lattepanda/lattepanda_behaviours/behaviour_ros/src'
 whitelisted_packages = ''.split(';') if '' != '' else []
 blacklisted_packages = ''.split(';') if '' != '' else []
-underlay_workspaces = '/home/lattepanda/lattepanda_behaviours/behaviour_ros/devel;/opt/ros/melodic'.split(';') if '/home/lattepanda/lattepanda_behaviours/behaviour_ros/devel;/opt/ros/melodic' != '' else []
+underlay_workspaces = '/home/lattepanda/lattepanda_behaviours/behaviour_ros/devel;/opt/ros/noetic'.split(';') if '/home/lattepanda/lattepanda_behaviours/behaviour_ros/devel;/opt/ros/noetic' != '' else []

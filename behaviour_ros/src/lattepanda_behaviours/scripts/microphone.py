@@ -1,11 +1,16 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # license removed for brevity
 import rospy
 # from std_msgs.msg import Float32MultiArray
 from lattepanda_behaviours.msg import vect_msg
-from pyfirmata import Arduino, util
+from pymata4 import pymata4
+#from pyfirmata import Arduino, util
 import time
 import numpy as np
+
+PIN_LED = 13
+PIN_LEFT_MIC = 0
+PIN_RIGHT_MIC = 1
 
 def microphone():
     # Intialize node and topic
@@ -15,14 +20,17 @@ def microphone():
     msg = vect_msg()
     
     # Initialize pyfirmata and mic
-    board = Arduino("/dev/ttyACM0")
-    analog_0 = board.get_pin('a:0:i')       # Left mic
-    analog_1 = board.get_pin('a:1:i')       # Right mic
-    it = util.Iterator(board)
-    it.start()
-    analog_0.enable_reporting()
-    analog_1.enable_reporting()
+    board = pymata4.Pymata4()
+    board.set_pin_mode_analog_input(PIN_LEFT_MIC)
+    board.set_pin_mode_analog_input(PIN_RIGHT_MIC)
+    board.set_pin_mode_digital_output(PIN_LED)
 
+    # analog_0 = board.get_pin('a:0:i')       # Left mic
+    # analog_1 = board.get_pin('a:1:i')       # Right mic
+    # it = util.Iterator(board)
+    # it.start()
+    # analog_0.enable_reporting()
+    # analog_1.enable_reporting()
 
     SampleWin = 0.25
     SignalMinL = 1.0
@@ -36,11 +44,11 @@ def microphone():
     while not rospy.is_shutdown():
         
         start = time.time()
-        board.digital[13].write(0)
+        board.digital_pin_write(PIN_LED,0)
         while(time.time() - start)< SampleWin:
-            valL = analog_0.read()              # Read left mic
+            valL = float (board.analog_read(PIN_LEFT_MIC)[0])  # Read left mic            
             time.sleep(0.001)
-            valR = analog_1.read()              # Read left mic
+            valR = float (board.analog_read(PIN_RIGHT_MIC)[0]) # Read left mic
             time.sleep(0.001)
             # os.system( 'clear' )
             # print(val)
@@ -69,8 +77,8 @@ def microphone():
         else:
             value = 0
 
-        if pktopkL > 0.12:
-            board.digital[13].write(1)
+        if pktopkL > 0.12:   
+            board.digital_pin_write(PIN_LED,1)
             time.sleep(0.2)
             rospy.loginfo('Left Calmp')
         SignalMinL = 1.0
@@ -78,7 +86,7 @@ def microphone():
             
         
         if pktopkR > 0.12:
-            board.digital[13].write(1)
+            board.digital_pin_write(PIN_LED,1)
             time.sleep(0.2)
             rospy.loginfo('Right Calmp')
         SignalMinR = 1.0

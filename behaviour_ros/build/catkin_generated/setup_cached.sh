@@ -7,5 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PWD="/home/lattepanda/lattepanda_behaviours/behaviour_ros/build"
-export PYTHONPATH="/home/lattepanda/lattepanda_behaviours/behaviour_ros/devel/lib/python2.7/dist-packages:$PYTHONPATH"
+export PWD='/home/lattepanda/lattepanda_behaviours/behaviour_ros/build'

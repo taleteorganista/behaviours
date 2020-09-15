@@ -100,16 +100,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsFixedSize< ::lattepanda_behaviours::vect_msg_<ContainerAllocator> >
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::lattepanda_behaviours::vect_msg_<ContainerAllocator> const>
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
 struct IsMessage< ::lattepanda_behaviours::vect_msg_<ContainerAllocator> >
   : TrueType
   { };
@@ -117,6 +107,16 @@ struct IsMessage< ::lattepanda_behaviours::vect_msg_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsMessage< ::lattepanda_behaviours::vect_msg_<ContainerAllocator> const>
   : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::lattepanda_behaviours::vect_msg_<ContainerAllocator> >
+  : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::lattepanda_behaviours::vect_msg_<ContainerAllocator> const>
+  : FalseType
   { };
 
 template <class ContainerAllocator>

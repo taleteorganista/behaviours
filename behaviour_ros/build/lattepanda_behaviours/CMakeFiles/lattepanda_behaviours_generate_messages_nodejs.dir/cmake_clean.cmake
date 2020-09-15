@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/lattepanda_behaviours_generate_messages_nodejs"
   "/home/lattepanda/lattepanda_behaviours/behaviour_ros/devel/share/gennodejs/ros/lattepanda_behaviours/msg/vect_msg.js"
+  "CMakeFiles/lattepanda_behaviours_generate_messages_nodejs"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -2,7 +2,7 @@
 
 message(STATUS "lattepanda_behaviours: 1 messages, 0 services")
 
-set(MSG_I_FLAGS "-Ilattepanda_behaviours:/home/lattepanda/lattepanda_behaviours/behaviour_ros/src/lattepanda_behaviours/msg;-Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg;-Ilattepanda_behaviours:/home/lattepanda/lattepanda_behaviours/behaviour_ros/src/lattepanda_behaviours/msg")
+set(MSG_I_FLAGS "-Ilattepanda_behaviours:/home/lattepanda/lattepanda_behaviours/behaviour_ros/src/lattepanda_behaviours/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg;-Ilattepanda_behaviours:/home/lattepanda/lattepanda_behaviours/behaviour_ros/src/lattepanda_behaviours/msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -31,7 +31,7 @@ add_custom_target(_lattepanda_behaviours_generate_messages_check_deps_${_filenam
 _generate_msg_cpp(lattepanda_behaviours
   "/home/lattepanda/lattepanda_behaviours/behaviour_ros/src/lattepanda_behaviours/msg/vect_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/lattepanda_behaviours
 )
 
@@ -64,7 +64,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS lattepanda_behaviours_generate_mess
 _generate_msg_eus(lattepanda_behaviours
   "/home/lattepanda/lattepanda_behaviours/behaviour_ros/src/lattepanda_behaviours/msg/vect_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/lattepanda_behaviours
 )
 
@@ -97,7 +97,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS lattepanda_behaviours_generate_mess
 _generate_msg_lisp(lattepanda_behaviours
   "/home/lattepanda/lattepanda_behaviours/behaviour_ros/src/lattepanda_behaviours/msg/vect_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/lattepanda_behaviours
 )
 
@@ -130,7 +130,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS lattepanda_behaviours_generate_mess
 _generate_msg_nodejs(lattepanda_behaviours
   "/home/lattepanda/lattepanda_behaviours/behaviour_ros/src/lattepanda_behaviours/msg/vect_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/lattepanda_behaviours
 )
 
@@ -163,7 +163,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS lattepanda_behaviours_generate_mess
 _generate_msg_py(lattepanda_behaviours
   "/home/lattepanda/lattepanda_behaviours/behaviour_ros/src/lattepanda_behaviours/msg/vect_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/lattepanda_behaviours
 )
 
@@ -250,7 +250,7 @@ if(TARGET lattepanda_behaviours_generate_messages_nodejs)
 endif()
 
 if(genpy_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/lattepanda_behaviours)
-  install(CODE "execute_process(COMMAND \"/usr/bin/python2\" -m compileall \"${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/lattepanda_behaviours\")")
+  install(CODE "execute_process(COMMAND \"/usr/bin/python3\" -m compileall \"${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/lattepanda_behaviours\")")
   # install generated code
   install(
     DIRECTORY ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/lattepanda_behaviours
