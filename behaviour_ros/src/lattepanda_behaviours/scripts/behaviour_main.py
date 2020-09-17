@@ -20,17 +20,16 @@ msg = vect_msg()
 # TODO define mavlink message to send a vector instead of Odometry Msg 
 
 
-
-def callback(nav_sub,mic_sub,rs_sub,pub):
+def callback(nav_sub,mic_sub,rs_sub,force_sub,light_sub,pub):
     # Collecting vectors
     vect_a  = [mic_sub.angle, mic_sub.value]
     vect_b  = [nav_sub.angle, nav_sub.value]
     vect_c  = [rs_sub.angle, rs_sub.value]
+    vect_d  = [force_sub.angle, force_sub.value]
+    vect_e  = [light_sub.angle, light_sub.value] 
 
     # Sum vectors
-    bb_vect = vectfcn.sum_vect(vectfcn.sum_vect(vect_a,vect_b),vect_c)
-    # bb_vect =  vect_b
-    # bb_vect = vectfcn.sum_vect(vect_a,vect_b)
+    bb_vect = vectfcn.sum_vect(vectfcn.sum_vect(vectfcn.sum_vect(vectfcn.sum_vect(vect_a,vect_b),vect_c),vect_d),vect_e)
     rospy.loginfo(bb_vect) 
     
     # Send Mavlink Msg
@@ -73,8 +72,10 @@ def behaviour_main():
 
     # Subscribe to messages
     rs_sub = message_filters.Subscriber('/rs_vect', vect_msg)
-    mic_sub = message_filters.Subscriber('/microphone_vect', vect_msg)
+    mic_sub = message_filters.Subscriber('/mic_vect', vect_msg)
     nav_sub = message_filters.Subscriber('/navigator_vect', vect_msg)
+    force_sub = message_filters.Subscriber('/force_vect', vect_msg)
+    light_sub = message_filters.Subscriber('/light_vect', vect_msg)
     
     # Syncronize
     ts = message_filters.ApproximateTimeSynchronizer([nav_sub,mic_sub,rs_sub], queue_size=10, slop=0.5)
