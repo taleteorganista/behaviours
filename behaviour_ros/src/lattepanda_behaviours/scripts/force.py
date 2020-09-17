@@ -12,8 +12,8 @@ def callback(data):
     angle = 0. 
     force = 0.
     msg = vect_msg()
-    forceL = data.data[0]
-    forceR = data.data[1]
+    forceL = data.data[0]/1024.0
+    forceR = data.data[1]/1024.0
 
     #TODO define here a behavior according to the lux value
     angle = (forceL - forceR) * 180/1023

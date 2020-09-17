@@ -8,11 +8,12 @@ import rospy
 from lattepanda_behaviours.msg import vect_msg
 from std_msgs.msg import Int16MultiArray
 bh1750_factor = 1.2
+bh1750_max_lux = 54612
 
 def compute_lux(data_light):
     high = bin(data_light[0])[2:]
     low = bin(data_light[1])[2:]
-    lux = float(int(high+low,2))/bh1750_factor
+    lux = (float(int(high+low,2))/bh1750_factor)/bh1750_max_lux
     return(lux)
 
 def callback(data):

@@ -1,0 +1,7 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/lattepanda/lattepanda_behaviours/behaviour_ros/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/home/lattepanda/librealsense/build/wrappers/python"
+    ]
+}

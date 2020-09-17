@@ -19,8 +19,8 @@ def callback(data):
     pub = rospy.Publisher('mic_vect', vect_msg, queue_size=10)
     start = time.time()
     while(time.time() - start)< SampleWin:
-        valL = float (data.data[0])/1024.  # Read left mic            
-        valR = float (data.data[1])/1024. # Read left mic
+        valL = float (data.data[0]/1024.0)  # Read left mic            
+        valR = float (data.data[1]/1024.0) # Read left mic
         
         if (valL) == None:
             rospy.logwarn("Left Mic acquisition failed")

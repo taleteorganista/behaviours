@@ -78,7 +78,7 @@ def behaviour_main():
     light_sub = message_filters.Subscriber('/light_vect', vect_msg)
     
     # Syncronize
-    ts = message_filters.ApproximateTimeSynchronizer([nav_sub,mic_sub,rs_sub], queue_size=10, slop=0.5)
+    ts = message_filters.ApproximateTimeSynchronizer([nav_sub,mic_sub,rs_sub,force_sub,light_sub], queue_size=10, slop=0.5)
     
     # Run callback
     ts.registerCallback(callback,pub)

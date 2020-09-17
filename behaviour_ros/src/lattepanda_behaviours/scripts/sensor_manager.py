@@ -7,6 +7,8 @@ import time
 import numpy as np
 from std_msgs.msg import Int16MultiArray
 
+#TODO check sensor range and normalization (in behaviours!)
+
 # ANALOG Pin definition
 # fsr 
 fsr_left = 0    # Force Resistor Sensor / Left side 
@@ -77,7 +79,7 @@ def sensor_manager():
         for pin in mic:
             mic_val.append(list(board.analog_read(pin)))
             time.sleep(0.01)
-        mic_msg.data = [mic_val[0][0] , mic_val[1][0]]
+        mic_msg.data = [mic_val[0][0], mic_val[1][0]]
         pub_mic.publish(mic_msg)
 
         # fsr data
